@@ -20,7 +20,7 @@ const client = new Client({
 
 function findMyIp(): string {
 	const networks = os.networkInterfaces();
-	const configs = networks['Wi-Fi'];
+	const configs = networks[config.networkInterface];
 	if (!configs) {
 		throw new Error('The network interface does not exist.');
 	}
