@@ -1,0 +1,36 @@
+{
+  "name": "@karuta/ddnspod",
+  "version": "0.0.0",
+  "description": "Report your IP address to DNSPod.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "debug": "tsc --incremental --sourceMap",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takashiro/cindi.git#dev"
+  },
+  "keywords": [
+    "ddns",
+    "dynamic",
+    "dns",
+    "dnspod"
+  ],
+  "author": "Kazuichi Takashiro",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/takashiro/cindi/issues"
+  },
+  "homepage": "https://github.com/takashiro/cindi",
+  "dependencies": {
+    "ip": "^1.1.8",
+    "tencentcloud-sdk-nodejs-dnspod": "^4.0.656"
+  },
+  "devDependencies": {
+    "@types/ip": "^1.1.0",
+    "@types/node": "^16.18.39",
+    "typescript": "^5.1.6"
+  }
+}
