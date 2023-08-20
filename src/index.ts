@@ -45,6 +45,11 @@ function findMyIp(): string {
 	}
 
 	const [record] = records;
+	if (record.Type === 'AAAA' && record.Value === myIp) {
+		console.log('Already updated.');
+		return;
+	}
+
 	await client.ModifyRecord({
 		Domain: config.domain,
 		SubDomain: config.subdomain,
