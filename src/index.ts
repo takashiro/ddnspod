@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+import * as fsp from 'fs/promises';
 import * as os from 'os';
 import * as ip from 'ip';
 import * as tencentcloud from 'tencentcloud-sdk-nodejs-dnspod';
@@ -5,6 +7,7 @@ import * as tencentcloud from 'tencentcloud-sdk-nodejs-dnspod';
 const { Client } = tencentcloud.dnspod.v20210323;
 
 const config = require('./ddnspod.config.js');
+const dataFile = '.ddnspod';
 
 const client = new Client({
 	credential: {
@@ -36,6 +39,14 @@ function findMyIp(): string {
 	const myIp = findMyIp();
 	console.log(`IP: ${myIp}`);
 
+	if (fs.existsSync(dataFile)) {
+		const prevIp = await fsp.readFile(dataFile, 'utf-8');
+		if (prevIp === myIp) {
+			console.log('Not changed.');
+			return;
+		}
+	}
+
 	const { RecordList: records } = await client.DescribeRecordList({
 		Domain: config.domain,
 		Subdomain: config.subdomain,
@@ -47,6 +58,7 @@ function findMyIp(): string {
 	const [record] = records;
 	if (record.Type === 'AAAA' && record.Value === myIp) {
 		console.log('Already updated.');
+		await fsp.writeFile('.ddnspod', myIp);
 		return;
 	}
 
@@ -58,4 +70,6 @@ function findMyIp(): string {
 		RecordLine: record.Line,
 		Value: myIp,
 	});
+
+	await fsp.writeFile('.ddnspod', myIp);
 }());
