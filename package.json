@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "debug": "tsc --incremental --sourceMap",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "eslint --ext=ts,js ."
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,10 @@
   "devDependencies": {
     "@types/ip": "^1.1.0",
     "@types/node": "^16.18.39",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "typescript": "^5.1.6"
   }
 }

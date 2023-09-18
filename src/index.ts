@@ -6,6 +6,8 @@ import * as tencentcloud from 'tencentcloud-sdk-nodejs-dnspod';
 
 const { Client } = tencentcloud.dnspod.v20210323;
 
+// eslint-disable-next-line max-len
+// eslint-disable-next-line import/newline-after-import, @typescript-eslint/no-var-requires, import/extensions
 const config = require('./ddnspod.config.js');
 const dataFile = '.ddnspod';
 
